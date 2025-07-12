@@ -1,0 +1,22 @@
+# Python bytecode
+__pycache__/
+*.pyc
+
+# Virtual environments
+.venv/
+env/
+venv/
+
+# Packaging/build files
+build/
+dist/
+*.egg-info/
+
+# pytest cache
+.pytest_cache/
+
+# VS Code workspace settings
+.vscode/
+
+# Environment variables
+.env
