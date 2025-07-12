@@ -1,5 +1,16 @@
 name: CI
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - '**'           # All branches
+    paths:
+      - 'src/**'  # Only trigger if files in the infra directory change
+  pull_request:
+    branches:
+      - '**'           # All branches
+    paths:
+      - 'src/**'  # Only trigger if files in the infra directory change
+
 
 jobs:
   test:
