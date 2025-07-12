@@ -9,4 +9,4 @@ def test_hello_world():
 def test_hello_world2():
     request = None  # Simulate a request object (could be a mock)
     response = hello_gcf(request)
-    assert response == "Hello World!"
+    assert response == "Hello GCF!"
