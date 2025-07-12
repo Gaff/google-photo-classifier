@@ -18,30 +18,17 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up Terraform
-        uses: hashicorp/setup-terraform@v2
+        uses: hashicorp/setup-terraform@v3
         with:
-          terraform_version: 1.3.0  # Specify your Terraform version
+          terraform_version: 1.12.2  # Specify your Terraform version
 
       - name: Terraform Init
         run: terraform init
         working-directory: ./infra  # Pointing to the infra directory
 
-      - name: Check for changes in Terraform files
-        id: check_changes
-        run: |
-          git fetch origin main  # Fetch the latest commit from main
-          if [[ $(git diff --name-only HEAD origin/main | grep '^infra/.*\.tf$') ]]; then
-            echo "Terraform files have changed."
-            echo "::set-output name=changed::true"
-          else
-            echo "No changes in Terraform files."
-            echo "::set-output name=changed::false"
-          fi
-
       - name: Terraform Plan
-        if: steps.check_changes.outputs.changed == 'true'
         run: terraform plan
         working-directory: ./infra  # Pointing to the infra directory
