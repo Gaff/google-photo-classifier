@@ -1,5 +1,5 @@
 # .devcontainer/Dockerfile
-FROM mcr.microsoft.com/vscode/devcontainers/python:3.10
+FROM mcr.microsoft.com/vscode/devcontainers/python:3.12
 
 # Install terraform
 RUN wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | tee /usr/share/keyrings/hashicorp-archive-keyring.gpg \
