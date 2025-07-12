@@ -1,0 +1,34 @@
+name: Terraform CI
+
+on:
+  push:
+    branches:
+      - '**'
+    paths:
+      - 'infra/**'  # Only trigger if files in the infra directory change
+  pull_request:
+    branches:
+      - '**'
+    paths:
+      - 'infra/**'  # Only trigger if files in the infra directory change
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.12.2  # Specify your Terraform version
+
+      - name: Terraform Init
+        run: terraform init
+        working-directory: ./infra  # Pointing to the infra directory
+
+      - name: Terraform Plan
+        run: terraform plan
+        working-directory: ./infra  # Pointing to the infra directory
