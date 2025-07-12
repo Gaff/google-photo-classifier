@@ -14,5 +14,6 @@
         }
     },
     "postCreateCommand": "pip install -r src/requirements-dev.txt",
-    "remoteUser": "vscode"
+    "remoteUser": "vscode",
+    "forwardPorts": [8080]
 }
