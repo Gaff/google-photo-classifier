@@ -1,0 +1,16 @@
+# Ignore all these dirs
+.git
+.github
+.devcontainer
+.vscode/
+infra/
+tests/
+
+# Things that python tends to cook
+.coverage
+.pytest_cache/
+__pycache__/
+*.pyc
+*.pyo
+*.md
+
