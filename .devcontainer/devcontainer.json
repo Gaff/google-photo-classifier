@@ -8,8 +8,11 @@
         "vscode": {
             "extensions": [
                 "ms-python.python",
+                "ms-python.vscode-pylance",
                 "hashicorp.terraform",
-                "googlecloudtools.cloudcode"
+                "googlecloudtools.cloudcode",
+                "github.vscode-github-actions",
+                "eamodio.gitlens" // GitLens for enhanced Git capabilities, suggested by AI
             ]
         }
     },

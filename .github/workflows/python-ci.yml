@@ -2,7 +2,7 @@ name: Python CI
 on:
   push:
     branches:
-      - '**'           # All branches
+      - main
     paths:
       - 'src/**'  # Only trigger if files in the infra directory change
   pull_request:
