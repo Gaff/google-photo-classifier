@@ -38,12 +38,13 @@ jobs:
           credentials_json: ${{ secrets.GCP_SA_KEY }}      
       - id: set-func-name
         run: |
-          if [ "${{ github.ref_name }}" = "main" ]; then
+          BRANCH_NAME="${{ github.head_ref || github.ref_name }}"
+          if [ "$BRANCH_NAME" = "main" ]; then
             echo "branch=main" >> $GITHUB_OUTPUT
             echo "function_name=my-function" >> $GITHUB_OUTPUT
           else
             echo "branch=branch" >> $GITHUB_OUTPUT
-            echo "function_name=test-function-${{ github.ref_name }}" >> $GITHUB_OUTPUT
+            echo "function_name=test-function-$BRANCH_NAME" >> $GITHUB_OUTPUT
           fi
       - run: |
           gcloud functions deploy ${{ steps.set-func-name.outputs.function_name }} \
