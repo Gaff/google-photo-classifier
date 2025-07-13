@@ -35,8 +35,7 @@ resource "google_storage_bucket" "photo_bucket" {
   location = "${var.gcp_region}"
   retention_policy {
     # 1 week:
-    retention_period = "604800s" # 1 week
-    # retention_period = "86400s" # 1 day 
+    retention_period = 604800
   }
 }
 
