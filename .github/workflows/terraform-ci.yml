@@ -35,9 +35,9 @@ jobs:
           #service_account: 'terraform-pipeline@${{secrets.GCP_PROJECT_ID}}.iam.gserviceaccount.com'
 
       - name: Terraform Init
-        run: terraform init -backend-config="bucket=${{ secrets.GCP_PROJECT }}-terraform-state"
+        run: terraform init -backend-config="bucket=${{ secrets.GCP_PROJECT_ID }}-terraform-state"
         working-directory: ./infra  # Pointing to the infra directory
 
       - name: Terraform Plan
-        run: terraform plan -backend-config="bucket=${{ secrets.GCP_PROJECT }}-terraform-state"
+        run: terraform plan -backend-config="bucket=${{ secrets.GCP_PROJECT_ID }}-terraform-state"
         working-directory: ./infra  # Pointing to the infra directory
