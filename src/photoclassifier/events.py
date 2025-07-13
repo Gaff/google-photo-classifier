@@ -20,6 +20,7 @@ def on_event(event, context):
     vision_client = vision.ImageAnnotatorClient()
     response = vision_client.safe_search_detection(image=image)
     safe_search = response.safe_search_annotation
+    print(f"Safe search results for {file_name}: {safe_search}")
     if response.error.message:
         raise Exception(f'Vision API error: {response.error.message}')
 
@@ -35,6 +36,9 @@ def on_event(event, context):
     metadata = blob.metadata or {}
     label = 'adult' if is_adult else 'safe'
     metadata['content-rating'] = label
+    blob.metadata = metadata
+    blob.patch()  # Save metadata
+
 
     print(f"Labeled file '{file_name}' as '{label}'.")
     return f"Processed message with ID: {context.event_id}"
