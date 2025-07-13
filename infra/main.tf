@@ -39,7 +39,7 @@ resource "google_storage_bucket" "photo_bucket" {
   }
 }
 
-resource "google_pubsub_topic" "photo-topic" {
+resource "google_pubsub_topic" "photo_topic" {
   name = "photo-topic"
 }
 
