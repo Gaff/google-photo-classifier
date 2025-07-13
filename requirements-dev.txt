@@ -1,5 +1,0 @@
--r src/requirements.txt
-pytest
-black
-pylint
-mypy
