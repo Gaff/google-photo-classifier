@@ -17,7 +17,6 @@ provider "google" {
 }
 
 variable "gcp_project" {
-    default = "core-outrider-465721-j9 "
 }
 variable "gcp_region" {
   default = "europe-west2"
