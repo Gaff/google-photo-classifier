@@ -14,6 +14,7 @@ on:
 
 jobs:
   terraform:
+    environment: uat
     runs-on: ubuntu-latest
 
     steps:
@@ -28,8 +29,9 @@ jobs:
       - name: Google Auth
         uses: google-github-actions/auth@v2
         with:
-          credentials_json: ${{ secrets.GCP_SA_KEY }}
-
+          create_credentials_file: true
+          workload_identity_provider: 'projects/${{secrets.GCP_PROJECT_ID}}/locations/global/workloadIdentityPools/github-pool/providers/github-provider-3'
+          service_account: 'terraform-pipeline@${{secrets.GCP_PROJECT_ID}}.iam.gserviceaccount.com'
 
       - name: Terraform Init
         run: terraform init
