@@ -8,7 +8,8 @@ locals {
     "cloudfunctions.googleapis.com",
     "run.googleapis.com",
     "cloudbuild.googleapis.com",
-    "cloudvision.googleapis.com",
+    "eventarc.googleapis.com",
+    "vision.googleapis.com",
   ]
 }
 

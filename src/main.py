@@ -1,5 +1,5 @@
 import photoclassifier.main as main_module
-import photoclassifier.event as event
+import photoclassifier.events as events
 import json
 
 def main_http(request):
@@ -21,4 +21,22 @@ def main_http(request):
     )
 
 def main_pubsub(event, context):
-    return event.on_event(event, context)
+    return events.on_event(event, context)
+
+if __name__ == "__main__":
+    from flask import Flask, request
+    app = Flask(__name__)
+
+    @app.route('/hello', methods=['GET'])
+    def hello():
+        return main_http(request)
+    
+    @app.route('/test', methods=['GET', 'POST'])
+    def test():
+        return main_pubsub([], request.environ)
+
+    @app.route('/event', methods=['GET', 'POST'])
+    def pubsub():
+        return main_pubsub(request.get_json(), request.environ)
+
+    app.run(debug=True, host='localhost', port=8080)
