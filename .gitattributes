@@ -1,0 +1,2 @@
+# Always use LF in source code, which is best for containers and cloud.
+* text=auto eol=lf

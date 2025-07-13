@@ -3,7 +3,7 @@ name: Terraform CI
 on:
   push:
     branches:
-      - '**'
+      - main
     paths:
       - 'infra/**'  # Only trigger if files in the infra directory change
   pull_request:
@@ -14,6 +14,9 @@ on:
 
 jobs:
   terraform:
+    environment: uat
+    env: 
+      TF_VAR_gcp_project: ${{ secrets.GCP_PROJECT_ID }}
     runs-on: ubuntu-latest
 
     steps:
@@ -25,10 +28,18 @@ jobs:
         with:
           terraform_version: 1.12.2  # Specify your Terraform version
 
+      - name: Google Auth
+        uses: google-github-actions/auth@v2
+        with:
+          create_credentials_file: true
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+          #workload_identity_provider: 'projects/${{secrets.GCP_PROJECT_ID}}/locations/global/workloadIdentityPools/github-pool/providers/github-provider-3'
+          #service_account: 'terraform-pipeline@${{secrets.GCP_PROJECT_ID}}.iam.gserviceaccount.com'
+
       - name: Terraform Init
-        run: terraform init
+        run: terraform init -backend-config="bucket=${{ secrets.GCP_PROJECT_ID }}-terraform-state"
         working-directory: ./infra  # Pointing to the infra directory
 
       - name: Terraform Plan
-        run: terraform plan
+        run: terraform plan -input=false
         working-directory: ./infra  # Pointing to the infra directory
