@@ -10,8 +10,6 @@ resource "google_storage_bucket" "code_bucket" {
   }
 }
 
-
-
 locals {
   services = [
     "pubsub.googleapis.com",
