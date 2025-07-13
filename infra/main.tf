@@ -33,9 +33,13 @@ resource "google_pubsub_topic" "test-topic" {
 resource "google_storage_bucket" "photo_bucket" {
   name     = "${var.gcp_project}-photo-bucket"
   location = "${var.gcp_region}"
-  retention_policy {
-    # 1 week:
-    retention_period = 604800
+  lifecycle_rule {
+    condition {
+      age = 7
+    }
+    action {
+      type = "Delete"
+    }
   }
 }
 
