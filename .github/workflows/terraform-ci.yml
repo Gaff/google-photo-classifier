@@ -25,6 +25,12 @@ jobs:
         with:
           terraform_version: 1.12.2  # Specify your Terraform version
 
+      - name: Google Auth
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+
       - name: Terraform Init
         run: terraform init
         working-directory: ./infra  # Pointing to the infra directory
