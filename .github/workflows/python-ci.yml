@@ -55,4 +55,5 @@ jobs:
             --project=${{ secrets.GCP_PROJECT_ID }} \
             --trigger-http \
             --no-allow-unauthenticated \
+            --stage-bucket=${{ secrets.GCP_PROJECT_ID }}-code-bucket \
             --quiet
