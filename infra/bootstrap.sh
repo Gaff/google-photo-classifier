@@ -15,7 +15,7 @@ gcloud storage buckets update gs://${BUCKET_NAME} --versioning
 
 
 # I must have have create a terrform service account, with viewer role
-# It also needs: 
+# It also needs (for cloudrun functions): 
  gcloud projects add-iam-policy-binding ${GOOGLE_CLOUD_PROJECT} \
   --member="serviceAccount:terraform-pipeline@${GOOGLE_CLOUD_PROJECT}.iam.gserviceaccount.com" \
   --role="roles/run.admin"

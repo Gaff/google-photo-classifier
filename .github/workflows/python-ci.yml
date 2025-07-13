@@ -28,6 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: test
     steps:
+      - uses: actions/checkout@v4
       - uses: google-github-actions/auth@v2
         with:
           create_credentials_file: true
@@ -35,7 +36,6 @@ jobs:
       - uses: google-github-actions/setup-gcloud@v2
         with:
           version: 'latest'
-      - uses: actions/checkout@v4
       - id: set-func-name
         run: |
           BRANCH_NAME="${{ github.head_ref || github.ref_name }}"
