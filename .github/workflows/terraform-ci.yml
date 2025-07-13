@@ -17,7 +17,7 @@ jobs:
   terraform:
     environment: uat
     env: 
-      TF_VAR_gcp_project: "${{ secrets.GCP_PROJECT_ID }}"
+      TF_VAR_gcp_project: ${{ secrets.GCP_PROJECT_ID }}
     runs-on: ubuntu-latest
 
     steps:
