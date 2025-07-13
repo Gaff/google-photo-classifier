@@ -54,6 +54,5 @@ jobs:
             --source=./src \
             --project=${{ secrets.GCP_PROJECT_ID }} \
             --trigger-http \
-            --labels env=${{ steps.set-func-name.outputs.branch }},date=$(date +%Y-%m-%d) \
             --no-allow-unauthenticated \
             --quiet
