@@ -39,5 +39,5 @@ jobs:
         working-directory: ./infra  # Pointing to the infra directory
 
       - name: Terraform Plan
-        run: terraform plan
+        run: terraform plan -input=false
         working-directory: ./infra  # Pointing to the infra directory
