@@ -1,4 +1,5 @@
 import photoclassifier.main as main_module
+import photoclassifier.event as event
 import json
 
 def main_http(request):
@@ -19,6 +20,5 @@ def main_http(request):
         {'Content-Type': 'application/json'}
     )
 
-def main_pubsub(arg):
-    ret = main_module.hello_gcf(arg)
-    return ret
+def main_pubsub(event, context):
+    return event.on_event(event, context)
