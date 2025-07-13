@@ -26,7 +26,7 @@ jobs:
           terraform_version: 1.12.2  # Specify your Terraform version
 
       - name: Google Auth
-        uses: google-github-actions/auth@v
+        uses: google-github-actions/auth@2
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
 
