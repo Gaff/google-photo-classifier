@@ -13,3 +13,25 @@ gcloud storage buckets create gs://${BUCKET_NAME} \
 
 gcloud storage buckets update gs://${BUCKET_NAME} --versioning
 
+
+
+
+
+# WIF: (didn't get it to work!)
+
+gcloud iam workload-identity-pools create "github-pool" \
+    --project="${GOOGLE_CLOUD_PROJECT}" \
+    --location="global" \
+    --display-name="GitHub Pool"
+
+gcloud iam workload-identity-pools describe "github-pool" \
+    --project="${GOOGLE_CLOUD_PROJECT}" --location="global" \
+    --format="value(name)"
+
+gcloud iam workload-identity-pools providers create-oidc "github-provider" \
+  --project="${GOOGLE_CLOUD_PROJECT}" \
+  --location="global" \
+  --workload-identity-pool="github-pool" \
+  --display-name="GitHub Provider" \
+  --attribute-mapping="google.subject=assertion.sub" \
+  --issuer-uri="https://token.actions.githubusercontent.com"
