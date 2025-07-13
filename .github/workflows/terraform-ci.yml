@@ -43,3 +43,8 @@ jobs:
       - name: Terraform Plan
         run: terraform plan -input=false
         working-directory: ./infra  # Pointing to the infra directory
+
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/main'
+        run: terraform apply -input=false
+        working-directory: ./infra  # Pointing to the infra directory
