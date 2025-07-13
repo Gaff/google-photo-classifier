@@ -1,6 +1,4 @@
-data "google_project" "gcp_project" { 
-  project_id = var.gcp_project 
-}
+
 
 resource "google_storage_bucket" "code_bucket" {
   name     = "${var.gcp_project}-code-bucket"
@@ -10,21 +8,6 @@ resource "google_storage_bucket" "code_bucket" {
   }
 }
 
-locals {
-  services = [
-    "pubsub.googleapis.com",
-    "cloudfunctions.googleapis.com",
-    "run.googleapis.com",
-    "cloudbuild.googleapis.com",
-  ]
-}
-
-resource "google_project_service" "services" {
-  # Bit of a gotcha but requires a delay before it goes live!
-  for_each = toset(local.services)
-  project = var.gcp_project
-  service = each.value
-}
 
 resource "google_pubsub_topic" "test-topic" {
   name = "my-test-topic"
@@ -48,6 +31,7 @@ resource "google_pubsub_topic" "photo_topic" {
 }
 
 resource "google_storage_notification" "photo_bucket_notification" { 
+  depends_on = [ google_pubsub_topic_iam_binding.allow_service_agent_to_storage_publish ]
   bucket = google_storage_bucket.photo_bucket.name 
   topic = google_pubsub_topic.photo_topic.id 
   event_types = ["OBJECT_FINALIZE"] 
@@ -67,3 +51,4 @@ resource "google_pubsub_topic_iam_binding" "allow_service_agent_to_storage_publi
   role = "roles/pubsub.publisher" 
   members = [ "serviceAccount:service-${data.google_project.gcp_project.number}@gs-project-accounts.iam.gserviceaccount.com", ] 
 }
+
